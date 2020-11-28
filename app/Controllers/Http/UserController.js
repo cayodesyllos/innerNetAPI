@@ -17,7 +17,6 @@ class UserController {
         error: { message: error.message },
       });
     }
-    return;
   }
 }
 
