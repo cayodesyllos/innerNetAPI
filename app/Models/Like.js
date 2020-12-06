@@ -3,7 +3,7 @@
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use("Model");
 
-class Image extends Model {
+class Like extends Model {
   user() {
     return this.belongsTo("App/Models/User");
   }
@@ -12,4 +12,4 @@ class Image extends Model {
   }
 }
 
-module.exports = Image;
+module.exports = Like;

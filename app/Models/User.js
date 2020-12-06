@@ -10,18 +10,8 @@ class User extends Model {
     return ["password"];
   }
 
-  static get computed() {
-    return ["url"];
-  }
-
-  getUrl() {
-    const image = this.image();
-    console.log(image);
-    return process.env.S3_BASE_URL + image.key;
-  }
-
   image() {
-    return this.hasOne("App/Models/Image");
+    return this.hasMany("App/Models/Image");
   }
 
   posts() {
