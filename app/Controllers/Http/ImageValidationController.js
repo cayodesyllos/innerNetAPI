@@ -4,6 +4,7 @@ const Rekognition = require("../../Services/Rekognition");
 const User = use("App/Models/User");
 const Drive = use("Drive");
 const Event = use("Event");
+const crypto = require("crypto");
 
 class ImageValidationController {
   async store({ request, response, params }) {
@@ -30,9 +31,13 @@ class ImageValidationController {
         throw new Error("Faces do not match!");
       }
 
+      const token = crypto.randomBytes(3).toString("hex");
+      user.token = token;
+      await user.save();
+
       const mail_data = {
         email: user.email,
-        token: user.token,
+        token: token,
       };
 
       Event.fire("user::signUp", mail_data);

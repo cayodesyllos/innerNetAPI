@@ -1,7 +1,6 @@
 var nodemailer = require("nodemailer");
 var smtpTransport = require("nodemailer-smtp-transport");
 const Env = use("Env");
-console.log(Env.get("EMAIL_FROM"), Env.get("EMAIL_PASS"));
 const transporter = nodemailer.createTransport(
   smtpTransport({
     service: "gmail",
