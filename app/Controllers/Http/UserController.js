@@ -29,7 +29,7 @@ class UserController {
               const user_ = await User.findBy("id", comment.user_id);
               const image_ = await user_.image().fetch();
               return {
-                userAvartar: image_.toJSON()[0].url,
+                userAvatar: image_.toJSON()[0].url,
                 userName: user_.username,
                 content: comment.content,
                 created_at: comment.created_at,
@@ -46,7 +46,7 @@ class UserController {
       );
 
       return {
-        userAvartar: image.toJSON()[0].url,
+        userAvatar: image.toJSON()[0].url,
         userName: user.username,
         posts: posts_with_comments,
       };

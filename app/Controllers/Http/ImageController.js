@@ -13,14 +13,13 @@ class ImageController {
     await request.multipart
       .file("image", {}, async (file) => {
         try {
-          const content_type = file.headers["content-type"];
-
           key = crypto.randomBytes(10).toString("hex");
 
           await Image.create({ user_id: user_id, key: key });
 
           await Drive.put(key, file.stream, {
-            content_type,
+            ContentType: "image/png",
+            ACL: "public-read",
           });
         } catch (error) {
           return response.status(400).send({

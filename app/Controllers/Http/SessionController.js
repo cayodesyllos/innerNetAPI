@@ -6,9 +6,10 @@ class SessionController {
   async authenticate({ request, response, auth }) {
     try {
       const { email, password } = request.all();
-      await User.findByOrFail("email", email);
+      const user = await User.findByOrFail("email", email);
 
       const token = await auth.attempt(email, password);
+      token.active = user.active;
 
       return token;
     } catch (error) {
