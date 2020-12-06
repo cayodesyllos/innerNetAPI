@@ -14,6 +14,17 @@ class UserController {
       });
     }
   }
+
+  async show({ request, response, auth }) {
+    try {
+      const user = await auth.getUser();
+      return user;
+    } catch (error) {
+      return response.status(400).send({
+        error: { message: error.message },
+      });
+    }
+  }
 }
 
 module.exports = UserController;
