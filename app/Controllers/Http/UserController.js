@@ -18,7 +18,7 @@ class UserController {
   async show({ request, response, auth }) {
     try {
       const user = await auth.getUser();
-      const image = await user.image().fetch();
+      const image = await user.image().where("verification", false).fetch();
       const posts = await user.posts().orderBy("created_at", "desc").fetch();
       const posts_with_comments = await Promise.all(
         posts.rows.map(async (post) => {
@@ -56,6 +56,7 @@ class UserController {
       return {
         userAvatar: image.toJSON()[0].url,
         userName: user.username,
+        user_id: user.id,
         posts: posts_with_comments,
       };
     } catch (error) {

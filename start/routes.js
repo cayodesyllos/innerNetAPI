@@ -8,6 +8,9 @@ Route.post("/validation/:id", "ImageValidationController.store");
 Route.post("/user", "UserController.store");
 Route.post("/login", "SessionController.authenticate");
 
+Route.post("/send_reset_email", "ResetPasswordController.sendResetEmail");
+Route.post("/reset_password", "ResetPasswordController.refresh");
+
 Route.group(() => {
   Route.post("/activate", "ActivationController.activate");
   Route.get("/activate", "ActivationController.createActivation");
