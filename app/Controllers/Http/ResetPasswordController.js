@@ -7,9 +7,11 @@ const Hash = use("Hash");
 class ResetPasswordController {
   async refresh({ request, response }) {
     try {
-      const data = request.only(["token"]);
+      const data = request.only(["token", "password"]);
       const user = await User.findByOrFail("token", data.token);
-      user.password = await Hash.make(user.password);
+      const new_password = data.password;
+      console.log(new_password);
+      user.password = await Hash.make(new_password);
       user.token = null;
       await user.save();
     } catch (error) {

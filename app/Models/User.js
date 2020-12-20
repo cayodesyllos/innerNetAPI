@@ -40,14 +40,13 @@ class User extends Model {
 
         userInstance.username = usernameFinal;
       }
-
-      if (userInstance.dirty.password) {
-        userInstance.password = await Hash.make(userInstance.password);
-      }
     });
     this.addHook("beforeCreate", async (userInstance) => {
       if (userInstance.dirty.email) {
         userInstance.email = userInstance.email.toLowerCase();
+      }
+      if (userInstance.dirty.password) {
+        userInstance.password = await Hash.make(userInstance.password);
       }
     });
   }

@@ -33,9 +33,10 @@ class ImageController {
       .process();
     const resp = {
       key: key,
-      key_verification: verification_image
-        ? verification_image.toJSON()[0].key
-        : null,
+      key_verification:
+        verification_image.rows.length > 0
+          ? verification_image.toJSON()[0].key
+          : null,
     };
     return response.status(200).send(resp);
   }
